@@ -1,104 +1,86 @@
 const Bootcamp = require('../models/Bootcamp')
 const ErrorResponse = require('../utils/errorResponse')
+const asyncHandler = require('../middleware/async')
 
 // @desc    GET all bootcamps
 // @route   GET /api/v1/bootcamps
 // @access  Public
-exports.getBootcamps = async (req, res, next) => {
+exports.getBootcamps = asyncHandler(async (req, res, next) => {
 
-    try {
-        const bootcamps = await Bootcamp.find()
-        res.status(200).json({
-            success: true,
-            count: bootcamps.length,
-            data: bootcamps
-        })
 
-    } catch (err) {
-        next(err)
-    }
-}
+    const bootcamps = await Bootcamp.find()
+    res.status(200).json({
+        success: true,
+        count: bootcamps.length,
+        data: bootcamps
+    })
+})
 
 // @desc    GET single bootcamp
 // @route   GET /api/v1/bootcamp/:id
 // @access  Public
-exports.getBootcamp = async (req, res, next) => {
-    try {
-        const bootcamp = await Bootcamp.findById(req.params.id)
+exports.getBootcamp = asyncHandler(async (req, res, next) => {
 
-        if (!bootcamp) {
-            return next(new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404))
-        }
-        res.status(200).json({
-            success: true,
-            data: bootcamp
-        })
+    const bootcamp = await Bootcamp.findById(req.params.id)
 
-    } catch (err) {
-        next(err)
-
-
+    if (!bootcamp) {
+        return next(new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404))
     }
-}
+    res.status(200).json({
+        success: true,
+        data: bootcamp
+    })
+})
 
 // @desc    Create new bootcamp
 // @route   POST /api/v1/bootcamp/
 // @access  Private
-exports.createBootcamp = async (req, res, next) => {
-    try {
-        const bootcamp = await Bootcamp.create(req.body)
+exports.createBootcamp = asyncHandler(async (req, res, next) => {
 
-        res.status(201).json({
-            success: true,
-            data: bootcamp
-        })
-    } catch (err) {
-        next(err)
-    }
-}
+    const bootcamp = await Bootcamp.create(req.body)
+
+    res.status(201).json({
+        success: true,
+        data: bootcamp
+    })
+})
 
 // @desc    Update bootcamp
 // @route   PUT /api/v1/bootcamp/:id
 // @access  Private
-exports.updateBootcamp = async (req, res, next) => {
-    try {
-        const bootcamp = await Bootcamp.findByIdAndUpdate(req.params.id, req.body, {
-            new: true,
-            runValidators: true
-        })
+exports.updateBootcamp = asyncHandler(async (req, res, next) => {
 
-        if (!bootcamp) {
-            return next(new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404))
+    const bootcamp = await Bootcamp.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+        runValidators: true
+    })
 
-        }
-        res.status(200).json({
-            success: true,
-            data: bootcamp
-        })
-    } catch (err) {
-        next(err)
+    if (!bootcamp) {
+        return next(new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404))
+
     }
-}
+    res.status(200).json({
+        success: true,
+        data: bootcamp
+    })
+})
 
 // @desc    Delete bootcamp
 // @route   DELETE /api/v1/bootcamp/:id
 // @access  Private
-exports.deleteBootcamp = async (req, res, next) => {
-    try {
-        const bootcamp = await Bootcamp.findByIdAndDelete(req.params.id)
+exports.deleteBootcamp = asyncHandler(async (req, res, next) => {
 
-        if (!bootcamp) {
-            return next(new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404))
+    const bootcamp = await Bootcamp.findByIdAndDelete(req.params.id)
 
-        }
-        res.status(200).json({
-            success: true,
-            data: {}
-        })
-    } catch (err) {
-        next(err)
+    if (!bootcamp) {
+        return next(new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404))
+
     }
-}
+    res.status(200).json({
+        success: true,
+        data: {}
+    })
+})
 
 
 
