@@ -3,11 +3,13 @@ const dotenv = require('dotenv')
 const morgan = require('morgan')
 const colors = require('colors')
 const connectDB = require('./config/db')
-const bootcamps = require('./routes/bootcamps')
-const errorHandler = require('./middleware/error')
 
 // load env vars
 dotenv.config({ path: './config/config.env' })
+
+const bootcamps = require('./routes/bootcamps')
+const errorHandler = require('./middleware/error')
+
 
 // connect to database
 connectDB()
