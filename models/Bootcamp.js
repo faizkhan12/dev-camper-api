@@ -1,3 +1,8 @@
+/*
+    models of bootcamp table 
+    author - @Faiz Khan
+*/
+
 const mongoose = require('mongoose')
 const slugify = require('slugify')
 const geocoder = require('../utils/geocoder')

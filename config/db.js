@@ -1,3 +1,8 @@
+/*
+    mongoose configurations
+    author - @Faiz Khan
+*/
+
 const { bold } = require('colors')
 const mongoose = require('mongoose')
 
