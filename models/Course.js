@@ -1,3 +1,8 @@
+/*
+    models of Course table 
+    author - @Faiz Khan
+*/
+
 const mongoose = require('mongoose')
 
 const CourseSchema = new mongoose.Schema({
@@ -18,7 +23,7 @@ const CourseSchema = new mongoose.Schema({
         type: Number,
         required: [true, 'Please add a tuition cost']
     },
-    minimumSkills: {
+    minimumSkill: {
         type: String,
         required: [true, 'Please add a minimum skill'],
         enum: ['beginner', 'intermediate', 'advanced']
