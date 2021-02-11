@@ -79,7 +79,7 @@ exports.getBootcamps = asyncHandler(async (req, res, next) => {
 })
 
 // @desc    GET single bootcamp
-// @route   GET /api/v1/bootcamp/:id
+// @route   GET /api/v1/bootcamps/:id
 // @access  Public
 exports.getBootcamp = asyncHandler(async (req, res, next) => {
 
@@ -95,7 +95,7 @@ exports.getBootcamp = asyncHandler(async (req, res, next) => {
 })
 
 // @desc    Create new bootcamp
-// @route   POST /api/v1/bootcamp/
+// @route   POST /api/v1/bootcamps/
 // @access  Private
 exports.createBootcamp = asyncHandler(async (req, res, next) => {
 
@@ -108,7 +108,7 @@ exports.createBootcamp = asyncHandler(async (req, res, next) => {
 })
 
 // @desc    Update bootcamp
-// @route   PUT /api/v1/bootcamp/:id
+// @route   PUT /api/v1/bootcamps/:id
 // @access  Private
 exports.updateBootcamp = asyncHandler(async (req, res, next) => {
 
@@ -128,7 +128,7 @@ exports.updateBootcamp = asyncHandler(async (req, res, next) => {
 })
 
 // @desc    Delete bootcamp
-// @route   DELETE /api/v1/bootcamp/:id
+// @route   DELETE /api/v1/bootcamps/:id
 // @access  Private
 exports.deleteBootcamp = asyncHandler(async (req, res, next) => {
 
