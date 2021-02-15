@@ -1,5 +1,5 @@
 /*
-    course controller to get all courses, get all courses for specific bootcamp
+    course controller to get all courses, get all courses for specific bootcamp, create, update and delete course
     author - @Faiz Khan
 */
 
