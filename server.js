@@ -4,6 +4,9 @@ const morgan = require('morgan')
 const colors = require('colors')
 const connectDB = require('./config/db')
 const fileUpload = require('express-fileupload')
+const path = require('path')
+const errorHandler = require('./middleware/error')
+const cookieParser = require('cookie-parser')
 
 // load env vars
 dotenv.config({ path: './config/config.env' })
@@ -11,8 +14,6 @@ dotenv.config({ path: './config/config.env' })
 const bootcamps = require('./routes/bootcamps')
 const courses = require('./routes/courses')
 const auth = require('./routes/auth')
-const errorHandler = require('./middleware/error')
-const path = require('path')
 
 // connect to database
 connectDB()
@@ -21,6 +22,9 @@ const app = express()
 
 // Body parser
 app.use(express.json())
+
+// cookie parser
+app.use(cookieParser())
 
 // dev logging middleware
 if (process.env.NODE_ENV === 'development') {
