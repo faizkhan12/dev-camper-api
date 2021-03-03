@@ -3,6 +3,7 @@ const ErrorResponse = require('../utils/errorResponse')
 const asyncHandler = require('../middleware/async')
 const sendEmail = require('../utils/sendEmail')
 const crypto = require('crypto')
+const { read } = require('fs')
 
 // @desc    Register user
 // @route   POST /api/v1/auth/register
@@ -77,6 +78,25 @@ exports.getMe = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    update user details 
+// @route   PUT /api/v1/auth/updatedetails
+// @access  private
+exports.updateDetails = asyncHandler(async (req, res, next) => {
+    const fieldsToUpdate = {
+        name: req.body.name,
+        email: req.body.email
+    }
+
+    const user = await User.findByIdAndUpdate(req.user.id, fieldsToUpdate, {
+        new: true,
+        runValidators: true
+    })
+
+    res.status(200).json({
+        success: true,
+        data: user
+    })
+})
 // @desc    Forgot password 
 // @route   POST /api/v1/auth/forgotpassword
 // @access  public
