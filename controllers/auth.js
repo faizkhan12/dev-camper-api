@@ -3,7 +3,6 @@ const ErrorResponse = require('../utils/errorResponse')
 const asyncHandler = require('../middleware/async')
 const sendEmail = require('../utils/sendEmail')
 const crypto = require('crypto')
-const { read } = require('fs')
 
 // @desc    Register user
 // @route   POST /api/v1/auth/register
