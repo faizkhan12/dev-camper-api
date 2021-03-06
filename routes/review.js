@@ -5,7 +5,8 @@
 
 const express = require('express')
 const {
-    getReviews
+    getReviews,
+    getReview,
 } = require('../controllers/review')
 const advancedResults = require('../middleware/advancedResults')
 const Review = require('../models/Review')
@@ -21,5 +22,8 @@ router
         }),
         getReviews
     )
+router
+    .route('/:id')
+    .get(getReview)
 
 module.exports = router 
