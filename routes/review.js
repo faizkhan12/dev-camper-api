@@ -7,9 +7,11 @@ const express = require('express')
 const {
     getReviews,
     getReview,
+    createReview,
 } = require('../controllers/review')
 const advancedResults = require('../middleware/advancedResults')
 const Review = require('../models/Review')
+const { protect, authorize } = require('../middleware/auth')
 
 const router = express.Router({ mergeParams: true })
 
@@ -22,6 +24,8 @@ router
         }),
         getReviews
     )
+    .post(protect, authorize('user', 'admin'), createReview)
+
 router
     .route('/:id')
     .get(getReview)
