@@ -61,3 +61,55 @@ exports.createReview = asyncHandler(async (req, res, next) => {
         data: review
     })
 })
+
+// @desc    Update review
+// @route   PUT /api/v1/reviews/:id
+// @access  Private
+exports.updateReview = asyncHandler(async (req, res, next) => {
+
+    let review = await Review.findById(req.params.id)
+
+    if (!review) {
+        return next(new ErrorResponse(`Review not found with id of ${req.params.id}`, 404))
+
+    }
+
+    // make sure review belongs to user or user is admin
+    if (review.user.toString() !== req.user.id && req.user.role !== 'admin') {
+        return next(new ErrorResponse(`User ${req.user.id} is not authorized to update a review  ${review._id}`, 401))
+    }
+
+    review = await Review.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+        runValidators: true
+    })
+    await review.save() // because findByIdAndUpdate method does not trigger a recalculation of the average ratinh
+
+    res.status(200).json({
+        success: true,
+        data: review
+    })
+})
+
+// @desc    Delete review
+// @route   DELETE /api/v1/reviews/:id
+// @access  Private
+exports.deleteReview = asyncHandler(async (req, res, next) => {
+
+    const review = await Review.findById(req.params.id)
+
+    if (!review) {
+        return next(new ErrorResponse(`review not found with id of ${req.params.id}`, 404))
+
+    }
+
+    // make sure user is bootcamp owner 
+    if (review.user.toString() !== req.user.id && req.user.role !== 'admin') {
+        return next(new ErrorResponse(`User ${req.user.id} is not authorized to delete a review  ${review._id}`, 401))
+    }
+    review.remove()
+    res.status(200).json({
+        success: true,
+        data: {}
+    })
+})
