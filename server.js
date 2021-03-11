@@ -7,7 +7,10 @@ const fileUpload = require('express-fileupload')
 const path = require('path')
 const errorHandler = require('./middleware/error')
 const cookieParser = require('cookie-parser')
-const mongoSanitize = require('express-mongo-sanitize'); 
+const mongoSanitize = require('express-mongo-sanitize')
+const helmet = require("helmet")
+var xss = require('xss-clean')
+
 
 // load env vars
 dotenv.config({ path: './config/config.env' })
@@ -39,6 +42,12 @@ app.use(fileUpload())
 
 // sanitize data
 app.use(mongoSanitize())
+
+// set security headers
+app.use(helmet())
+
+// prevent xss attacks
+app.use(xss())
 
 // set static folder
 app.use(express.static(path.join(__dirname, 'public')))
