@@ -7,6 +7,7 @@ const fileUpload = require('express-fileupload')
 const path = require('path')
 const errorHandler = require('./middleware/error')
 const cookieParser = require('cookie-parser')
+const mongoSanitize = require('express-mongo-sanitize'); 
 
 // load env vars
 dotenv.config({ path: './config/config.env' })
@@ -35,6 +36,9 @@ if (process.env.NODE_ENV === 'development') {
 
 // File uploading 
 app.use(fileUpload())
+
+// sanitize data
+app.use(mongoSanitize())
 
 // set static folder
 app.use(express.static(path.join(__dirname, 'public')))
