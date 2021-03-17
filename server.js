@@ -8,7 +8,7 @@ const path = require('path')
 const errorHandler = require('./middleware/error')
 const cookieParser = require('cookie-parser')
 const mongoSanitize = require('express-mongo-sanitize')
-const helmet = require("helmet")
+// const helmet = require("helmet")
 var xss = require('xss-clean')
 const rateLimit = require("express-rate-limit");
 const hpp = require('hpp')
@@ -46,7 +46,7 @@ app.use(fileUpload())
 app.use(mongoSanitize())
 
 // set security headers
-app.use(helmet())
+// app.use(helmet({ contentSecurityPolic: false }))
 
 // prevent xss attacks
 app.use(xss())
