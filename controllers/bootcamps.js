@@ -1,6 +1,6 @@
 /*
     bootcamp controller to get all bootcamps, get single bootcamp, create, update and delete bootcamp, get bootcamp within radius
-    and uplaod bootcamp image
+    and upload bootcamp image
     author - @Faiz Khan
 */
 

@@ -19,13 +19,6 @@ exports.register = asyncHandler(async (req, res, next) => {
     })
 
     sendTokenResponse(user, 200, res)
-
-    // if (user) {
-    //     res.status(400).json({
-    //         success: false,
-    //         msg: 'user already exist'
-    //     })
-    // }
     res.status(200).json({
         success: true,
         token: token,
